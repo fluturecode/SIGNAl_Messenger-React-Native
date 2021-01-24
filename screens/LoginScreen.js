@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View, KeyboardAvoidingView } from "react-native"
 import { Button, Input, Image } from "react-native-elements"
 
 const LoginScreen = () => {
@@ -7,13 +7,13 @@ const LoginScreen = () => {
 	const [password, setPassword] = useState("")
 
 	return (
-		<View>
+		<KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
 			<Image
-				style={{ width: 200, height: 200 }}
 				source={{
 					uri:
 						"https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png",
 				}}
+				style={{ width: 200, height: 200 }}
 			/>
 			<View>
 				<Input
@@ -37,13 +37,17 @@ const LoginScreen = () => {
 					type='outline'
 				/>
 			</View>
-		</View>
+		</KeyboardAvoidingView>
 	)
 }
 
 export default LoginScreen
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		// alignItems: "center",
+	},
 	button: {
 		width: 200,
 		marginTop: 10,
