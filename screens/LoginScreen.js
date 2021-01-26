@@ -1,13 +1,16 @@
 import React, { useState } from "react"
-import { StyleSheet, View, KeyboardAvoidingView } from "react-native"
-import { Button, Input, Image } from "react-native-elements"
+import { KeyboardAvoidingView, StatusBar, StyleSheet, View } from "react-native"
+import { Button, Image, Input } from "react-native-elements"
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 
+	const signIn = () => {}
+
 	return (
 		<KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
+			<StatusBar style='light' />
 			<Image
 				source={{
 					uri:
@@ -15,7 +18,7 @@ const LoginScreen = () => {
 				}}
 				style={{ width: 200, height: 200 }}
 			/>
-			<View>
+			<View style={styles.inputContainer}>
 				<Input
 					placeholder='Email'
 					autoFocus
@@ -30,12 +33,13 @@ const LoginScreen = () => {
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 				/>
-				<Button containerStyle={styles.button} title='Login' />
+				<Button containerStyle={styles.button} onPress={signIn} title='Login' />
 				<Button
 					containerStyle={styles.button}
 					title='Register'
 					type='outline'
 				/>
+				<View style={{ height: 100 }} />
 			</View>
 		</KeyboardAvoidingView>
 	)
@@ -46,7 +50,13 @@ export default LoginScreen
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// alignItems: "center",
+		alignItems: "center",
+		justifyContent: "center",
+		padding: 10,
+		backgroundColor: "white",
+	},
+	inputContainer: {
+		width: 300,
 	},
 	button: {
 		width: 200,
