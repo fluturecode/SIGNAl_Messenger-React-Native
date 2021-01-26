@@ -1,8 +1,9 @@
+import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { KeyboardAvoidingView, StatusBar, StyleSheet, View } from "react-native"
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native"
 import { Button, Image, Input } from "react-native-elements"
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 
@@ -33,14 +34,15 @@ const LoginScreen = () => {
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 				/>
-				<Button containerStyle={styles.button} onPress={signIn} title='Login' />
-				<Button
-					containerStyle={styles.button}
-					title='Register'
-					type='outline'
-				/>
-				<View style={{ height: 100 }} />
 			</View>
+			<Button containerStyle={styles.button} onPress={signIn} title='Login' />
+			<Button
+				onPress={() => navigation.navigate("Register")}
+				containerStyle={styles.button}
+				type='outline'
+				title='Register'
+			/>
+			<View style-={{ height: 100 }} />
 		</KeyboardAvoidingView>
 	)
 }
