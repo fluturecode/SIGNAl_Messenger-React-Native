@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import React from "react"
 import { StyleSheet } from "react-native"
 import "react-native-gesture-handler"
+import HomeScreen from "./screens/HomeScreen"
 import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"
 
@@ -20,6 +21,7 @@ export default function App() {
 			<Stack.Navigator screenOptions={globalScreenOptons}>
 				<Stack.Screen name='Login' component={LoginScreen} />
 				<Stack.Screen name='Register' component={RegisterScreen} />
+				<Stack.Screen name='Home' component={HomeScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	)

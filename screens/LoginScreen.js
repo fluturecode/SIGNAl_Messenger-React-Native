@@ -1,13 +1,35 @@
 import { StatusBar } from "expo-status-bar"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { KeyboardAvoidingView, StyleSheet, View } from "react-native"
 import { Button, Image, Input } from "react-native-elements"
+import { auth } from "../firebase"
 
 const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 
-	const signIn = () => {}
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((authUser) => {
+			if (authUser) {
+				navigation.replace("Home")
+			}
+		})
+		return unsubscribe
+	}, [])
+
+	const signIn = () => {
+		// auth
+		// 	.createUserWithEmailAndPassword(email, password)
+		// 	.then((authUser) => {
+		// 		authUser.user.update({
+		// 			displayName: name,
+		// 			photoURL:
+		// 				imageUrl ||
+		// 				"https:/cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+		// 		})
+		// 	})
+		// 	.catch((err) => alert(err.message))
+	}
 
 	return (
 		<KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
