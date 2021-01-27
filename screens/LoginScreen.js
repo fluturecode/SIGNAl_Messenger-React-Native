@@ -18,17 +18,9 @@ const LoginScreen = ({ navigation }) => {
 	}, [])
 
 	const signIn = () => {
-		// auth
-		// 	.createUserWithEmailAndPassword(email, password)
-		// 	.then((authUser) => {
-		// 		authUser.user.update({
-		// 			displayName: name,
-		// 			photoURL:
-		// 				imageUrl ||
-		// 				"https:/cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
-		// 		})
-		// 	})
-		// 	.catch((err) => alert(err.message))
+		auth
+			.signInWithEmailAndPassword(email, password)
+			.catch((err) => alert(err.message))
 	}
 
 	return (
@@ -55,6 +47,7 @@ const LoginScreen = ({ navigation }) => {
 					type='password'
 					value={password}
 					onChangeText={(text) => setPassword(text)}
+					onSubmitEditing={signIn}
 				/>
 			</View>
 			<Button containerStyle={styles.button} onPress={signIn} title='Login' />

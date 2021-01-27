@@ -2,7 +2,7 @@ import React from "react"
 import { StyleSheet } from "react-native"
 import { Avatar, ListItem } from "react-native-elements"
 
-const CustomListItem = () => {
+const CustomListItem = ({ id, chatName, enterChat }) => {
 	return (
 		<ListItem>
 			<Avatar
@@ -17,7 +17,8 @@ const CustomListItem = () => {
 					YouTube Chat
 				</ListItem.Title>
 				<ListItem.Subtitle numberOfLines={1} ellipsizeMode='tail'>
-					This is a Subtitle
+					This is a Subtitle that is too long for this line so we use
+					elipsize....
 				</ListItem.Subtitle>
 			</ListItem.Content>
 		</ListItem>
