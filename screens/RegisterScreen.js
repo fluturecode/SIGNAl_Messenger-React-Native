@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native"
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native"
+import { Button, Input, Text } from "react-native-elements"
 
 const RegisterScreen = ({ navigation }) => {
 	const [name, setName] = useState("")
@@ -46,6 +47,12 @@ const RegisterScreen = ({ navigation }) => {
 					onSubmitEditing={register}
 				/>
 			</View>
+			<Button
+				containerStyle={styles.button}
+				raised
+				onPress={register}
+				title='Register'
+			/>
 		</KeyboardAvoidingView>
 	)
 }
@@ -55,4 +62,5 @@ export default RegisterScreen
 const styles = StyleSheet.create({
 	container: {},
 	inputContainer: {},
+	button: {},
 })
