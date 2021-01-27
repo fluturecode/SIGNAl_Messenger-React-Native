@@ -18,7 +18,7 @@ const RegisterScreen = ({ navigation }) => {
 				Create a Signal account
 			</Text>
 
-			<View styles={styles.inputContainer}>
+			<View style={styles.inputContainer}>
 				<Input
 					placeholder='Full Name'
 					autoFocus
@@ -53,6 +53,7 @@ const RegisterScreen = ({ navigation }) => {
 				onPress={register}
 				title='Register'
 			/>
+			<View style={{ height: 100 }} />
 		</KeyboardAvoidingView>
 	)
 }
@@ -60,7 +61,18 @@ const RegisterScreen = ({ navigation }) => {
 export default RegisterScreen
 
 const styles = StyleSheet.create({
-	container: {},
-	inputContainer: {},
-	button: {},
+	container: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+		padding: 10,
+		backgroundColor: "white",
+	},
+	button: {
+		width: 200,
+		marginTop: 10,
+	},
+	inputContainer: {
+		width: 300,
+	},
 })
