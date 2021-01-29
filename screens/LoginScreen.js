@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
 					uri:
 						"https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png",
 				}}
-				style={{ width: 200, height: 200 }}
+				style={{ width: 250, height: 250 }}
 			/>
 			<View style={styles.inputContainer}>
 				<Input
@@ -71,12 +71,15 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		padding: 10,
 		backgroundColor: "white",
+		marginBottom: 40,
 	},
 	inputContainer: {
 		width: 300,
+		marginTop: 20,
+		paddingBottom: 10,
 	},
 	button: {
 		width: 200,
-		marginTop: 10,
+		marginTop: 20,
 	},
 })
