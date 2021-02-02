@@ -1,6 +1,8 @@
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons"
+import * as firebase from "firebase"
 import React, { useLayoutEffect, useState } from "react"
 import {
+	Keyboard,
 	KeyboardAvoidingView,
 	Platform,
 	SafeAreaView,
@@ -10,9 +12,11 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
+	TouchableWithoutFeedback,
 	View,
 } from "react-native"
 import { Avatar } from "react-native-elements"
+import { auth, db } from "../firebase.js"
 
 const ChatScreen = ({ navigation, route }) => {
 	const [input, setInput] = useState("")
@@ -66,7 +70,18 @@ const ChatScreen = ({ navigation, route }) => {
 		})
 	}, [navigation])
 
-	const sendMessage = () => {}
+	const sendMessage = () => {
+		Keyboard.dismiss()
+
+		db.collection("chats").doc(route.params.id).collection("messages").add({
+			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+			message: input,
+			displayName: auth.currentUser.displayName,
+			email: auth.currentUser.email,
+			photoURL: auth.currentUser.photoURL,
+		})
+		setInput("")
+	}
 
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -75,20 +90,23 @@ const ChatScreen = ({ navigation, route }) => {
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 				style={styles.container}
 				keyboardVerticalOffset={90}>
-				<>
-					<ScrollView>{/*Chat goes here*/}</ScrollView>
-					<View style={styles.footer}>
-						<TextInput
-							value={input}
-							onChangeText={(text) => setInput(text)}
-							placeholder='Signal Message'
-							style={styles.textInput}
-						/>
-						<TouchableOpacity onPress={sendMessage} activeOpactiy={0.5}>
-							<Ionicons name='send' size={24} color='#2B68E6' />
-						</TouchableOpacity>
-					</View>
-				</>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+					<>
+						<ScrollView>{/*Chat goes here*/}</ScrollView>
+						<View style={styles.footer}>
+							<TextInput
+								value={input}
+								onChangeText={(text) => setInput(text)}
+								onSubmitEditing={sendMessage}
+								placeholder='Signal Message'
+								style={styles.textInput}
+							/>
+							<TouchableOpacity onPress={sendMessage} activeOpactiy={0.5}>
+								<Ionicons name='send' size={24} color='#2B68E6' />
+							</TouchableOpacity>
+						</View>
+					</>
+				</TouchableWithoutFeedback>
 			</KeyboardAvoidingView>
 		</SafeAreaView>
 	)
@@ -97,7 +115,22 @@ const ChatScreen = ({ navigation, route }) => {
 export default ChatScreen
 
 const styles = StyleSheet.create({
-	container: {},
-	footer: {},
-	textInput: {},
+	container: {
+		flex: 1,
+	},
+	footer: {
+		flexDirection: "row",
+		alignItems: "center",
+		width: "100%",
+		padding: 15,
+	},
+	textInput: {
+		bottom: 0,
+		height: 40,
+		flex: 1,
+		backgroundColor: "#ECECEC",
+		padding: 10,
+		color: "grey",
+		borderRadius: 30,
+	},
 })
