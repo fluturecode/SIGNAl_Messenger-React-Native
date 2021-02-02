@@ -1,5 +1,6 @@
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons"
 import React, { useLayoutEffect } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Avatar } from "react-native-elements"
 
 const ChatScreen = ({ navigation, route }) => {
@@ -24,6 +25,29 @@ const ChatScreen = ({ navigation, route }) => {
 					<Text style={{ color: "white", marginLef: 10, fontWeight: "700" }}>
 						{route.params.chatName}
 					</Text>
+				</View>
+			),
+			headerLeft: () => (
+				<TouchableOpacity
+					style={{ marginLeft: 10 }}
+					onPress={navigation.goBack}>
+					<AntDesign name='arrowleft' size={24} color='white' />
+				</TouchableOpacity>
+			),
+			headerRight: () => (
+				<View
+					style={{
+						flexDirection: "row",
+						justifyContent: "space-between",
+						width: 80,
+						marginRight: 20,
+					}}>
+					<TouchableOpacity>
+						<FontAwesome name='video-camera' size={24} color='white' />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Ionicons name='call' size={24} color='white' />
+					</TouchableOpacity>
 				</View>
 			),
 		})
